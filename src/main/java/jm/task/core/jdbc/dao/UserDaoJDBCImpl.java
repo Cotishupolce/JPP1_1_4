@@ -12,12 +12,12 @@ public class UserDaoJDBCImpl  implements UserDao {
 
     private static final String CREATE_USERS_TABDLE_SQL = """
             CREATE TABLE `user` (
-              `id` int NOT NULL AUTO_INCREMENT,
+              `id` int AUTO_INCREMENT,
               `name` varchar(45) NOT NULL,
               `lastName` varchar(45) NOT NULL,
               `age` int DEFAULT NULL,
               PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3""";
+            ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3""";
     private static final String DROP_USERS_TABLE_SQL = "DROP TABLE IF EXISTS user";
     private static final String SAVE_USER_SQL = "INSERT INTO user (name, lastName, age) VALUES (?, ?, ?)";
     private static final String REMOVAE_USER_BY_ID_SQL = "DELETE FROM user WHERE id = ?";
@@ -76,15 +76,11 @@ public class UserDaoJDBCImpl  implements UserDao {
     }
 
     public List<User> getAllUsers() {
-        List<User> userList = new ArrayList<>();
+        List<User> userList = new ArrayList();
         try (var connection = Util.getOpen();
              var resultSet = connection.createStatement().executeQuery(GET_ALL_USERS_SQL)) {
             while (resultSet.next()) {
-                long id = resultSet.getLong("id");
-                String name = resultSet.getString("name");
-                String lastName = resultSet.getString("lastName");
-                byte age = resultSet.getByte("age");
-                User user = new User(id, name, lastName, age);
+                User user = new User(resultSet.getLong("id"),resultSet.getString("name"),resultSet.getString("lastName"),resultSet.getByte("age"));
                 userList.add(user);
             }
         } catch (SQLException e) {

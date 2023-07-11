@@ -8,16 +8,16 @@ import java.util.Objects;
 @Table
 public class User {
     @Id
-    private static Long id;
+    private Long id;
 
     @Column
-    private static String name;
+    private String name;
 
     @Column
-    private static String lastName;
+    private String lastName;
 
     @Column
-    private static Byte age;
+    private Byte age;
 
 
     public User(long id,String name, String lastName, Byte age) {
@@ -29,7 +29,7 @@ public class User {
 
 
 
-    public static Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -37,7 +37,7 @@ public class User {
         this.id = id;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
@@ -45,7 +45,7 @@ public class User {
         this.name = name;
     }
 
-    public static String getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
@@ -53,7 +53,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public static Byte getAge() {
+    public Byte getAge() {
         return age;
     }
 
